@@ -2,42 +2,31 @@ import { StyleSheet, View, Pressable, Text } from "react-native"
 
 type PropsTypes = {
     action?: () => void
+    theme?: string
     children: React.ReactNode
 }
 
-const Button = ({ action, children }: PropsTypes) => {
-    return (
-        <View style={styles.buttonContainer}>
-            <Pressable style={styles.button} onPress={action}>
-                <Text>{children}</Text>
+const Button = ({ action, theme, children }: PropsTypes) => {
+
+    if (theme === "primary") {
+        return (
+            <Pressable
+                className="px-4 py-2 bg-[#0f8fff] rounded-md"
+                onPress={action}
+            >
+                <Text className="text-white">{children}</Text>
             </Pressable>
-        </View>
+        )
+    }
+
+    return (
+        <Pressable
+            className="px-4 py-2"
+            onPress={action}
+        >
+            <Text>{children}</Text>
+        </Pressable>
     )
 }
 
 export default Button
-
-const styles = StyleSheet.create({
-    buttonContainer: {
-        width: 320,
-        height: 68,
-        marginHorizontal: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 3,
-    },
-    button: {
-        borderRadius: 10,
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-    },
-    buttonIcon: {
-        paddingRight: 8,
-    },
-    buttonLabel: {
-        fontSize: 16,
-    },
-})
